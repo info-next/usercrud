@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser= require('body-parser')
-// Require Notes routes
+
 
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -9,7 +9,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 // parse requests of content-type - application/json
 app.use(bodyParser.json())
 
-require('./app/routes/note.routes')(app);
+// Require Notes routes
+require('./app/routes/user.routes')(app);
 
 const host ='localhost'
 const port ='3000'
