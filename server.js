@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser= require('body-parser')
+const http = require('http');
 
 
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -11,9 +12,6 @@ app.use(bodyParser.json())
 
 // Require Notes routes
 require('./app/routes/user.routes')(app);
-
-const host ='localhost'
-const port ='3000'
 
 // Configuring the database
 const dbConfig = require('./config/database.config.js');
@@ -43,6 +41,11 @@ app.get('/', (req, res) => {
   // })
 
 
-app.listen(port,host, function() {
-    console.log('listening on','http://'+host+':'+port)
-  })
+// app.listen(port,host, function() {
+//     console.log('listening on','http://'+host+':'+port)
+//   })
+const port = process.env.PORT || 3000;
+const server= http.createServer(app);
+server.listen(port,() => {
+  console.log(`Server running at port `+port);
+});
